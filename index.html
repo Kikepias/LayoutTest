@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malin ❤️</title>
+    <style>
+        :root {
+            --bg-color: #0b071a;
+            --primary-pink: #ff64b4;
+            --magic-purple: #8a2be2;
+            --gold-accent: #f3af42;
+            --text-light: #f5f0ff;
+            --card-bg: rgba(25ffa, 20, 50, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 100, 180, 0.15) 0%, transparent 40%);
+        }
+
+        .container {
+            max-width: 600px;
+            width: 90%;
+            padding: 30px;
+            background: rgba(20, 15, 35, 0.75);
+            border: 2px solid rgba(255, 100, 180, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.4);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .orb {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: var(--primary-pink);
+            border-radius: 50%;
+            filter: blur(5px);
+            box-shadow: 0 0 15px var(--primary-pink);
+            animation: float 4s infinite ease-in-out;
+            opacity: 0.6;
+        }
+        .orb-1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .orb-2 { bottom: 15%; right: 10%; animation-delay: 2s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.2); }
+        }
+
+        h1 {
+            color: var(--gold-accent);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(243, 175, 66, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #bfaed4;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .main-question {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 60px;
+            align-items: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        #btn-yes {
+            background: linear-gradient(45deg, var(--primary-pink), var(--magic-purple));
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 100, 180, 0.5);
+        }
+
+        #btn-yes:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 100, 180, 0.8);
+        }
+
+        #btn-no {
+            background-color: #332845;
+            color: #a093b1;
+            position: absolute;
+            z-index: 10;
+        }
+
+        .itinerary {
+            display: none;
+            margin-top: 20px;
+            text-align: left;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .itinerary h2 {
+            color: var(--gold-accent);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid var(--primary-pink);
+        }
+
+        .step {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .step::before {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: var(--bg-color);
+            border: 2px solid var(--gold-accent);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--gold-accent);
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: var(--primary-pink);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .step-desc {
+            color: #d1c5e3;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--gold-accent);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            position: absolute;
+            animation: confettiDrop 3s linear infinite;
+            z-index: 99;
+        }
+
+        @keyframes confettiDrop {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-box">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+
+        <div id="quiz-section">
+            <h1>You've landed a Charm! 🦊</h1>
+            <p class="subtitle">...and it seems it worked on a Spanish guy</p>
+            
+            <p class="main-question">Would you like to go on a date with me? <br> (First time on voice call! ✨)</p>
+            
+            <div class="btn-container">
+                <button class="btn" id="btn-yes">YES! 💖</button>
+                <button class="btn" id="btn-no">No :c</button>
+            </div>
+        </div>
+
+        <div class="itinerary" id="itinerary-section">
+            <h2>✨ Our Plan ✨</h2>
+            <div class="timeline">
+                <div class="step">
+                    <div class="step-title">Phase 1: Talk & Chill ☕</div>
+                    <div class="step-desc">We hop on Discord, say hello for the first time, and talk about how our day went without any pressure. There will be no awkwardness</div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Phase 2: Into the Rift 🎮</div>
+                    <div class="step-desc">We play some League games together. You lock in ur Sera and we will collect our free LPs.</div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Phase 3: Post-Game breakdown ❤️ </div>
+                    <div class="step-desc">We blame our team for losing but we dont care because we are together and we enjoyed the game anyways</div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Phase 4: Watch Party 🎬</div>
+                    <div class="step-desc">We put on a movie, relax, and enjoy the rest of the date together.</div>
+                </div>
+            </div>
+            <p class="footer-note">Let me know if you want to do it the next week so you have time to prepare for it ❤️ Skatten min</p>
+        </div>
+    </div>
+
+    <script>
+        const btnYes = document.getElementById('btn-yes');
+        const btnNo = document.getElementById('btn-no');
+        const quizSection = document.getElementById('quiz-section');
+        const itinerarySection = document.getElementById('itinerary-section');
+        const mainBox = document.getElementById('main-box');
+
+        function moveButton() {
+    
+            const container = document.querySelector('.btn-container');
+            const containerWidth = container.clientWidth;
+            const containerHeight = container.clientHeight;
+    
+            const randomX = Math.floor(Math.random() * (containerWidth - btnNo.clientWidth));
+         
+            const randomY = Math.floor((Math.random() * 60) - 30); 
+
+            btnNo.style.left = randomX + 'px';
+            btnNo.style.transform = `translateY(${randomY}px)`;
+        }
+
+        btnNo.addEventListener('mouseenter', moveButton);
+        btnNo.addEventListener('click', moveButton); 
+
+        btnYes.addEventListener('click', () => {
+  
+            quizSection.style.display = 'none';
+            itinerarySection.style.style = 'block'; // Fallback
+            itinerarySection.style.display = 'block';
+            
+         
+            mainBox.style.maxWidth = '650px';
+            
+            createConfetti();
+        });
+
+     
+        function createConfetti() {
+            const colors = ['#ff64b4', '#8a2be2', '#f3af42', '#ffffff'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 8 + 5 + 'px';
+                confetti.style.height = confetti.style.width;
+                document.body.appendChild(confetti);
+                
+             
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+    </script>
+</body>
+</html>
